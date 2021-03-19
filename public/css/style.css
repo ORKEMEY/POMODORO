@@ -22,6 +22,7 @@ input,button,textarea{font-family: inherit;}
 a, a:visited{text-decoration: none;} 
 img{vertical-align: top;}
 ul li{list-style: none;} 
+
 /*------------------------------------------------------------------------------------*/
 body{
     background:  #FF6347 ;
@@ -44,7 +45,7 @@ body{
  
 .logo{
     font-size: 40px;
-    color: #00D4C6;
+    color:rgb(115, 18, 18);
 }
 .link {
     transition: .3s;
@@ -54,32 +55,29 @@ body{
 }
 
 .description{
-    display: flex;
-    justify-content: space-between;
     top: 35%;
     left: 10%;
-    width: 35%;
     position: absolute;
+    display: flex;
+    justify-content: space-between;
 }
 .description h1{
-    margin: 0;
+    width: 35%;
     font-size: 40px;
     color: #0e4215;
   
 }
-.description p{
-    color: #144106;
-    font-size: 20px;
-}
-
 /*-----popup-----------------------------------------------*/
 .popup{
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color:rgba(0, 0, 0, 0,8);
+    background-color:rgba(115, 18, 18, .4);
+    top: 0;
+    left: 0;
     opacity: 0;
     visibility: hidden;
+
 }
 .popup:target{
     opacity: 1;
@@ -91,6 +89,7 @@ body{
     align-items: center;
     justify-content: center;
     padding: 30px 10px;
+   
 }
 .popup_content{
     background-color: #fff;
@@ -98,6 +97,9 @@ body{
     max-width: 800px;
     padding: 30px;
     position: relative;
+    border-radius: 25px;
+    border: 10px solid #04615b;
+   
 }
 .popup_close{
     position: absolute;
@@ -109,54 +111,121 @@ body{
 }
 .popup_title{
     font-size: 20px;
-    margin: 0px opx 1em 0px;
 }
-.popup_text{
+.top{
+    display: flex;
+    justify-content: space-between;
+}
+.first{
     border-radius: 5px;
-    border: 2px solid #04615b;
-    
+    border: 4px solid #04615b;
 }
+.number{
+background: #25cabf;
+}
+/*switch*/
+.auto_start{
+    display: flex;
+    justify-content: space-between;  
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 35px;
+    height: 20px;
+  }
+  .switch input {display:none;}
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    top: 1px;
+    left: 1px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  input:checked + .slider {
+    background-color: #04615b;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #04615b;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 24px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
 /*--------------------------------------*/
-
+.container{
+    margin-right: 20%;
+}
   /* Countdown timer */
   .timer {
-    color: #ffffff;
+    color: #0e4215;
     text-align: center;
+    font-size: 30px;
     width: 20rem;
     height: 20rem;
-    border: 5px solid #fff;
+    border: 15px solid rgb(115, 18, 18);
     border-radius: 10rem;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
   .row {
-    width: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+
   }
-  
-  /* remove the padding on the play button */
-  .btn {
+  .cont_btn{
+    display: flex;
+    justify-content: space-between;
+    justify-content: center;
+  }
+  .btn, .fa-redo{
     padding: 0;
-  }
-  
-  /* play and reset icons */
-  .fa-play,
-  .fa-redo-alt {
-    color: #e3f6f5;
+    justify-content: center;
+    background: none;
+    color: #0e4215;
+    font-size: 40px;
     border: 2px solid transparent;
-   padding: 1rem;
-    border-radius: 2rem;
+    outline: 0;
   }
-  
-  .fa-play:hover,
-  .fa-redo-alt:hover {
+  .fa-redo{
+    font-size: 33px; 
+    margin-top: 4px;
+  }
+  .btn:hover,
+  .fa-redo:hover {
     color: #bae8e8;
-    border: 2px solid #bae8e8;
     transition: 0.3s ease;
   }
-  
-  /* Make the message visible */
   .show_message {
     display: block;
     padding: 1rem 0;
