@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-deployment
+  name: authorization-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: client
+      app: authorization
   template:
     metadata:
      labels:
-       app: client
+       app: authorization
     spec:
       containers:
-        - image: client_static
+        - image: authorization:0.1
           imagePullPolicy: Never
-          name: client
+          name: authorization
           ports:
             - containerPort: 80
