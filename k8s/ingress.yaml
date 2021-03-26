@@ -20,3 +20,10 @@ spec:
                 name: authorization-service
                 port:
                   number: 80
+          - path: /api/site
+            pathType: Prefix
+            backend:
+              service:
+                name: client-service
+                port:
+                  number: 80
