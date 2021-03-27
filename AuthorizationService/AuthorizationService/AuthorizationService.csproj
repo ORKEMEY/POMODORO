@@ -1,12 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
     <UserSecretsId>542f2694-c502-4e00-b438-bee26bca9c7d</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>  
-    
   </PropertyGroup>
 
   <ItemGroup>

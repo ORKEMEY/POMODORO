@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,9 +15,12 @@ namespace AuthorizationService.Controllers
 
 		public static List<Client> Clients;
 
+		private static bool IsBrokenController { get; set; }
+
 		static AuthorizationController()
 		{
 			Clients = new List<Client>();
+			IsBrokenController = false;
 		}
 
 		[HttpGet]
@@ -24,7 +28,8 @@ namespace AuthorizationService.Controllers
 		{
 
 			var client = Clients.Find(c => c.Login == login && c.Password == password);
-			if(client != default)
+			if (IsBrokenController) Thread.Sleep(5000);
+			if (client != default)
 			{
 				return new JsonResult( new { client.Id, client.Login });
 			}
@@ -34,10 +39,40 @@ namespace AuthorizationService.Controllers
 			}
 				
 		}
+		[Route("test")]
+		[HttpGet]
+		public IActionResult GeTest()
+		{
+			if (IsBrokenController) Thread.Sleep(5000);
+			return new OkResult();
+		}
+
+		[Route("break")]
+		[HttpGet]
+		public IActionResult GetBreak()
+		{
+			if(IsBrokenController)
+			return new OkObjectResult("Pod is already broken");
+
+			IsBrokenController = true;
+			return new OkObjectResult("Pod has been broken");
+		}
+
+		[Route("fix")]
+		[HttpGet]
+		public IActionResult GetRepair()
+		{
+			if(!IsBrokenController) 
+			return new OkObjectResult("Pod is serviceable");
+
+			IsBrokenController = false;
+			return new OkObjectResult("Pod has been repaired");
+		}
 
 		[HttpPost]
 		public IActionResult Post([FromQuery] string login, string password)
 		{
+			if (IsBrokenController) Thread.Sleep(5000);
 			try
 			{
 				if (Clients.Find(c => c.Login == login) != default)
