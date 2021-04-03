@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: authorization-deployment
+  name: testing-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: authorization
+      app: testing
   template:
     metadata:
      labels:
-       app: authorization
+       app: testing
     spec:
       containers:
-        - image: authorization:0.1
+        - image: testing:0.1
           imagePullPolicy: Never
-          name: authorization
+          name: testing
           ports:
             - containerPort: 80

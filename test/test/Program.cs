@@ -30,7 +30,7 @@ namespace test
 				try
 				{
 
-					HttpResponseMessage response = await client.GetAsync($"http://{ip}/api/authorization/test");
+					HttpResponseMessage response = await client.GetAsync($"http://{ip}/api/test");
 
 					if (!response.IsSuccessStatusCode)
 					{

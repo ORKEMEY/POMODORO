@@ -6,7 +6,7 @@ spec:
   host: authorization-service
   trafficPolicy:
     outlierDetection:
-      consecutive5xxErrors: 10
+      consecutive5xxErrors: 5
       interval: 10s
       baseEjectionTime: 30s
       maxEjectionPercent: 80
