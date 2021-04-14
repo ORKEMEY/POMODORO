@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AuthorizationService.DAL;
+using AuthorizationService.Interfaces;
+using AuthorizationService.Services;
 
 namespace AuthorizationService
 {
@@ -26,6 +26,8 @@ namespace AuthorizationService
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();
+			services.AddTransient<IUserService, UserService>();
+			services.AddTransient<IUnitOfWork, UnitOfWork>(x => new UnitOfWork(ServiceModule.GetDbContextOptions()));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: email
+  template:
+    metadata:
+     labels:
+       app: email
+    spec:
+      containers:
+        - image: email:0.1
+          imagePullPolicy: Never
+          name: email
+          ports:
+            - containerPort: 80
