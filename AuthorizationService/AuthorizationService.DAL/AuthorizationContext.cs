@@ -9,7 +9,7 @@ namespace AuthorizationService.DAL
 
 		public DbSet<UserDAL> Users { get; set; }
 
-		public AuthorizationContext(DbContextOptions options) : base(options)
+		public AuthorizationContext(DbContextOptions<AuthorizationContext> options) : base(options)
 		{
 			//Database.EnsureDeleted();
 			Database.EnsureCreated();

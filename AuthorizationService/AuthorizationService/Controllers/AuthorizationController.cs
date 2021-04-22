@@ -49,7 +49,7 @@ namespace AuthorizationService.Controllers
 
 		[Route("test")]
 		[HttpGet]
-		public IActionResult GeTest()
+		public IActionResult GetTest()
 		{
 			Console.WriteLine("test");
 			return new OkResult();
@@ -60,6 +60,7 @@ namespace AuthorizationService.Controllers
 		{
 			try
 			{
+				Console.WriteLine($"user:{login} {email} {password}");
 				service.AddItem(new UserDAL()
 				{
 					Login = login,

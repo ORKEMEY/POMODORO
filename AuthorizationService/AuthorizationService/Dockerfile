@@ -1,14 +1,12 @@
 FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["AuthorizationService/AuthorizationService.csproj", "AuthorizationService/"]
-COPY ["AuthorizationService.DAL/AuthorizationService.DAL.csproj", "AuthorizationService.DAL/"]
+COPY ["AuthorizationService/AuthorizationService/AuthorizationService.csproj", "AuthorizationService/"]
+COPY ["AuthorizationService/AuthorizationService.DAL/AuthorizationService.DAL.csproj", "AuthorizationService.DAL/"]
 RUN dotnet restore "AuthorizationService/AuthorizationService.csproj"
-COPY . .
+COPY AuthorizationService/ .
 WORKDIR "/src/AuthorizationService"
 RUN dotnet build "AuthorizationService.csproj" -c Release -o /app/build
 

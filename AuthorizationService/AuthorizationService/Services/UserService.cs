@@ -20,7 +20,6 @@ namespace AuthorizationService.Services
 		{
 			this.uof = uof;
 		}
-
 		public UserDAL GetItem(int? id)
 		{
 			if (id == null) throw new ValidationException("Id of user isn't set", "id");

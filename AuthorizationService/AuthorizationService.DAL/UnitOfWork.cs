@@ -23,7 +23,7 @@ namespace AuthorizationService.DAL
 			db = new AuthorizationContext(options);
 		}
 
-		public UnitOfWork(DbContextOptions options)
+		public UnitOfWork(DbContextOptions<AuthorizationContext> options)
 		{
 			db = new AuthorizationContext(options);
 		}

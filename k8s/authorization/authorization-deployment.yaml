@@ -18,3 +18,10 @@ spec:
           name: authorization
           ports:
             - containerPort: 80
+          #volumeMounts:
+           # - name: mssqldb
+           #   mountPath: /var/opt/mssql
+     # volumes:
+      #- name: mssqldb
+        #persistentVolumeClaim:
+         #claimName: local-volume-claim

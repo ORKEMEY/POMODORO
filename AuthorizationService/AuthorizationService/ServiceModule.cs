@@ -18,7 +18,7 @@ namespace AuthorizationService
             return config.GetConnectionString(connectionName);
         }
 
-        public static DbContextOptions GetDbContextOptions(string connectionName = "DefaultConnection")
+        public static DbContextOptions<AuthorizationContext> GetDbContextOptions(string connectionName = "DefaultConnection")
         {
 
             var optionsBuilder = new DbContextOptionsBuilder<AuthorizationContext>();

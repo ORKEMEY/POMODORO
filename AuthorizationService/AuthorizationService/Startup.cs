@@ -25,6 +25,7 @@ namespace AuthorizationService
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddDbContext<AuthorizationContext>();
 			services.AddControllers();
 			services.AddTransient<IUserService, UserService>();
 			services.AddTransient<IUnitOfWork, UnitOfWork>(x => new UnitOfWork(ServiceModule.GetDbContextOptions()));
