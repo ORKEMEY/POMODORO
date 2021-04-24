@@ -29,8 +29,8 @@ namespace AuthorizationService.Controllers
 			this.service = service;
 		}
 
-		[HttpGet]
-		public IActionResult Get([FromQuery] int id)
+		[HttpGet("{id}")]
+		public IActionResult Get(int id)
 		{
 			try
 			{
@@ -40,11 +40,41 @@ namespace AuthorizationService.Controllers
 			}
 			catch (ValidationException e)
 			{
+				string error = e.Message;
+				if (e.Property != null) error += " " + e.Property;
 				return new BadRequestObjectResult(new
 				{
-					errorText = e.Message
+					errorText = error
 				});
 			}
+		}
+		
+		[HttpGet]
+		public IActionResult Authentificate([FromQuery] string email, string password)
+		{
+			try
+			{
+				var user = service.Authentificate(email, password);
+				var res = new JsonResult(new { login = user.Login, email = user.EMail });
+				res.StatusCode = 200;
+				return res;
+			}
+			catch (ValidationException e)
+			{
+				string error = e.Message;
+				if (e.Property != null) error += " " + e.Property;
+				return new BadRequestObjectResult(new
+				{
+					errorText = error
+				});
+			}
+			catch (NotFoundException e){
+				return new NotFoundObjectResult(new
+					{
+						errorText = e.Message
+					});
+			}
+			
 		}
 
 		[Route("test")]
@@ -60,7 +90,6 @@ namespace AuthorizationService.Controllers
 		{
 			try
 			{
-				Console.WriteLine($"user:{login} {email} {password}");
 				service.AddItem(new UserDAL()
 				{
 					Login = login,
@@ -71,16 +100,38 @@ namespace AuthorizationService.Controllers
 			catch (ValidationException e)
 			{
 				string error = e.Message;
-				if (e.Property != null) error += ": " + e.Property;
-
+				if (e.Property != null) error += " " + e.Property;
 				return new BadRequestObjectResult(new { errorText = error });
 			}
 
-			return new OkResult();
+			var res = new JsonResult(new { login = login, email = email });
+			res.StatusCode = 200;
+			return res;
 		}
 
 		[HttpDelete]
-		public IActionResult Delete([FromQuery]  int id)
+		public IActionResult DeleteAccount([FromQuery] string email, string password)
+		{
+			try
+			{
+				var user = service.Authentificate(email, password);
+				if (user == null) return new NotFoundResult();
+				service.DeleteItem(user);
+			}
+			catch (ValidationException e)
+			{
+				string error = e.Message;
+				if (e.Property != null) error += " " + e.Property;
+				return new BadRequestObjectResult(new
+				{
+					errorText = error
+				});
+			}
+			return Ok();
+		}
+
+		[HttpDelete("{id}")]
+		public IActionResult Delete(int id)
 		{
 			try
 			{
@@ -90,7 +141,7 @@ namespace AuthorizationService.Controllers
 			catch (ValidationException e)
 			{
 				string error = e.Message;
-				if (e.Property != null) error += ": " + e.Property;
+				if (e.Property != null) error += " " + e.Property;
 				return new NotFoundObjectResult(new { errorText = error });
 			}
 

@@ -42,7 +42,13 @@ body{
   margin: 0 30px 0 0;
   font-size: 18px;
 }
-
+/* experiments */
+.nav li p{
+  color: #0a5f11;
+  margin: 0 30px 0 0;
+  font-size: 18px;
+}
+/* experiments */
 .logo{
   font-size: 40px;
   color:rgb(115, 18, 18);

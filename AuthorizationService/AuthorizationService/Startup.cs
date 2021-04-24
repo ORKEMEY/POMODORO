@@ -28,7 +28,12 @@ namespace AuthorizationService
 			services.AddDbContext<AuthorizationContext>();
 			services.AddControllers();
 			services.AddTransient<IUserService, UserService>();
-			services.AddTransient<IUnitOfWork, UnitOfWork>(x => new UnitOfWork(ServiceModule.GetDbContextOptions()));
+		#if DEBUG
+			services.AddTransient<IUnitOfWork, UnitOfWork>(x => new UnitOfWork(ServiceModule.GetDbContextOptions("DevConnection")));
+		#else
+			services.AddTransient<IUnitOfWork, UnitOfWork>(x => new UnitOfWork(ServiceModule.GetDbContextOptions())); 
+		#endif
+			//services.AddTransient<IUnitOfWork, UnitOfWork>(x => new UnitOfWork(ServiceModule.GetDbContextOptions()));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
