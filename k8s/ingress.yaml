@@ -4,6 +4,7 @@ metadata:
   name: pomodoro-ingress
 spec:
   rules:
+    #- host: pomodoro.com
     - http:
         paths:
           - path: /api/index        # шлях по якому відбувається перенаправлення на сервіс

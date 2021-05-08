@@ -1,33 +1,41 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="eng">
-    <head>
-        <title>POMODORO</title>
-        <link rel="stylesheet" href="css/style.css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="device-width">
-        <script src="https://kit.fontawesome.com/a3e84d316e.js" crossorigin="anonymous"></script>
-        <script src="js/main.js"></script>
-        <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<head>
+  <title>POMODORO</title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="device-width">
+  <script src="https://kit.fontawesome.com/a3e84d316e.js" crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
 </head>
 
-    <body onload="template()">
-        <div class="navigation">
-            <div class="logo"> <a href="index.html">POMODORO</a> </div>
-            <div class="menu">
-             <ul class="nav">
-                <li><a class="link" href="#popup">Setting</a></li>
-                <li><a class="link" href="#popup_2">Login</a></li>
-             </ul>
-            </div>
-        </div>
+<body onload="template()">
+  <div class="navigation">
+    <div class="logo"> <a href="index.html">POMODORO</a> </div>
+    <div class="menu">
+      <ul class="nav">
+        <li><a class="link" href="#popup">Setting</a></li>
+        <li><a id="a_log_in" class="link" href="#popup_2">Log in</a></li>
+      </ul>
+    </div>
+  </div>
   <!-------------------------------------------------------->
-    <div class="description">
-        <h1> Pomodoro tracker - customizable timer that works on desktop  browser.</h1>
-            <div class="container">
-             <!-- Main Timer -->
+  <div class="description">
+    <h1> Pomodoro tracker - customizable timer that works on desktop browser.</h1>
+    <div class="container">
+      <!-- Main Timer -->
+      <div class="menu">
+        <ul class="nav">
+           <li><p id="btn_pomodoro" class="link" >Pomodoro</p></li>
+           <li><p id="btn_short_break" class="link" >Short Break</p></li>
+           <li><p id="btn_long_break" class="link" >Long Break</p></li>
+        </ul>
+       </div>
       <div class="container timer">
         <div class="row">
           <div class="col-5">
@@ -41,119 +49,160 @@
           </div>
         </div>
       </div>
-       <!-- Finished Message -->
-       <div class="my-5">
+      <!-- Finished Message -->
+      <div class="my-5">
         <h3 id="done" class="text-center"></h3>
       </div>
 
-<div class="cont_btn">
-<button class="btn" onclick="start_timer()">
-    <i class="far fa-caret-square-right"></i>
-  </button>
-  <!--  <a href="./js/main.js#start_timer()"><i class="far fa-caret-square-right"></i></a>-->
-  <a href="index.html"><i class="fas fa-redo"></i></a>
-</div>
+      <div class="cont_btn">
+        <button id="btn_play_pause" class="btn">
+          <i id="i_btn_play_pause" class="far fa-caret-square-right"></i>
+        </button>
+        <i id="btn_reset" class="fas fa-redo"></i>
+      </div>
 
-    <!------------------------------------------------------------------------->
-<div id="popup" class="popup">
-    <div class="popup_body">
-        <div class="popup_content">
+      <!------------------------------------------------------------------------->
+      <div id="popup" class="popup">
+        <div class="popup_body">
+          <div class="popup_content">
             <a href="#" class="popup_close">X</a>
-            <div class="popup_title"> SETTING </div>
+            <div class="popup_title"> Pomodoro settings </div>
             <div class="popup_text">
-                 <p class="T(m)">Time(minutes)</h2>
-                 <div class="top">
-<div class="first">
-  <p>Pomodoro</p>
-  <input class="number" type="number" min="1" value="25">
-</div>
-<div class="first">
-  <p>Short Break</p>
-  <input class="number" type="number" min="1" value="5">
-</div>
-<div class="first">
-  <p>Long Break</p>
-  <input class="number" type="number" min="1" value="15">
-</div>
-  </div> <!--top-->
-  <div class="auto_start">
-    <p>Auto start next round?</p>
-  <label class="switch">
-    <input type="checkbox">
-    <span class="slider round"></span>
-  </label>
-</div>
-        </div><!--popup_text-->
-    </div><!--popup_content-->
-</div><!--popup_body-->
-</div><!--popup-->
+              <br>
+              <div class="">
+                <div id="popup_alert" class="alert alert-danger form-block" role="alert" hidden>
+                </div>
+              </div>
+              <p class="T(m)">Time(minutes)</p>
+              <br>
+              <div class="top">
+                <div class="first">
+                  <p>Pomodoro</p>
+                  <input id="int_popup_set_minutes" class="number" type="number" min="1" max="99" value="25">
+                </div>
+                <div class="first">
+                  <p>Short Break</p>
+                  <input id="int_popup_set_sh_br" class="number" type="number" min="1" max="99" value="5">
+                </div>
+                <div class="first">
+                  <p>Long Break</p>
+                  <input id="int_popup_set_lg_br" class="number" type="number" min="1" max="99" value="15">
+                </div>
+              </div>
+              <!--top-->
+              <hr color="#F1F1F1" size="2px" width="auto">
+              <div class="auto_start">
+                <p>Autostart next round?</p>
+                <label class="switch">
+                  <input id="int_popup_autostart" type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <a>
+                <input id="btn_popup_ok" type="button" value="Ok" class="btn_sing_in" onclick="btn_popup_ok()">
+              </a>
 
-<div id="popup_2" class="popup">
-  <div class="popup_body">
-      <div class="popup_content">
-          <a href="#" class="popup_close">X</a>
-          <div class="popup_title">Sign in to Pomodoro </div>
-          <div class="popup_text_2">
-            <div class="reg_yet">
-              <p>Not registered yet?</p>
-              <a href="#popup_3" class="link_sign_up">Sign up</a></div>
+            </div>
+            <!--popup_text-->
+          </div>
+          <!--popup_content-->
+        </div>
+        <!--popup_body-->
+      </div>
+      <!--popup-->
+
+      <div id="popup_2" class="popup">
+        <div class="popup_body">
+          <div class="popup_content">
+            <a href="#" class="popup_close">X</a>
+            <div class="popup_title">Sign in to Pomodoro </div>
+            <div class="popup_text_2">
+              <div class="reg_yet">
+                <p>Not registered yet?</p>
+                <a href="#popup_3" class="link_sign_up">Sign up</a>
+              </div>
               <br>
+              <div class="">
+                <div id="popup_2_alert" class="alert alert-danger form-block" role="alert" hidden>
+                </div>
+              </div>
               <p>Your email</p>
-                <input type="email" class="input-form">
-            <p>Your password</p>
-              <input type="password" class="input-form">
+              <input id="int_popup_2_email" type="email" class="input-form">
+              <p>Your password</p>
+              <input id="int_popup_2_password" type="password" class="input-form">
               <br>
-              <input type="submit" value="Sign in" onClick="window.open('#')" class="btn_sing_in">
+              <input id="btn_sign_in" type="submit" value="Sign in" onClick="window.open('#')" class="btn_sing_in">
               <br>
               <div class="container_2">
                 <hr>
                 <div class="or">or</div>
-            </div>
-            <br>
-            <div class="btn_sing_Google">
-              <i class="fab fa-google"></i>
-            <input type="submit" value="Sign in with Google" onClick="window.open('#')" class="btn_sing_G">
-          </div>
-      </div><!--popup_text-->
-  </div><!--popup_content-->
-</div><!--popup_body-->
-</div><!--popup-->
-
-<div id="popup_3" class="popup">
-  <div class="popup_body">
-      <div class="popup_content">
-          <a href="#" class="popup_close">X</a>
-          <div class="popup_title">Sign up to Pomodoro </div>
-          <div class="popup_text_2">
-            <div class="reg_yet">
-              <p>Already have an account?</p>
-              <a href="#popup_2" class="link_sign_up">Sign in</a></div>
+              </div>
               <br>
+              <div class="btn_sing_Google">
+                <i class="fab fa-google"></i>
+                <a href="#"></a>
+                <input type="submit" value="Sign in with Google" onClick="window.open('#')" class="btn_sing_G">
+                </a>
+              </div>
+            </div>
+            <!--popup_text_2-->
+          </div>
+          <!--popup_content-->
+        </div>
+        <!--popup_body-->
+      </div>
+      <!--popup_2-->
+
+      <div id="popup_3" class="popup">
+        <div class="popup_body">
+          <div class="popup_content">
+            <a href="#" class="popup_close">X</a>
+            <div class="popup_title">Sign up to Pomodoro </div>
+            <div class="popup_text_2">
+              <div class="reg_yet">
+                <p>Already have an account?</p>
+                <a href="#popup_2" class="link_sign_up">Sign in</a>
+              </div>
+              <br>
+              <div class="">
+                <div id="popup_3_alert" class="alert alert-danger form-block" role="alert" hidden>
+                </div>
+              </div>
               <p>Your name</p>
-              <input type="text" class="input-form">
+              <input id="int_popup_3_login" type="text" class="input-form">
               <p>Your email</p>
-                <input type="email" class="input-form">
-            <p>Your password</p>
-              <input type="password" class="input-form">
+              <input id="int_popup_3_email" type="email" class="input-form">
+              <p>Your password</p>
+              <input id="int_popup_3_password" type="password" class="input-form">
               <br>
               <div class="Pr_Pol">
-                <input type="checkbox">By creating an account you agree to the Terms of Service and Conditions and Privacy Policy
+                <input id="int_popup_3_terms" type="checkbox">&nbspBy creating an account you agree to the Terms of
+                Service and Conditions and Privacy Policy
               </div>
-              <input type="submit" value="Sign up" onClick="window.open('#')" class="btn_sing_in">
-              <br />
+              <input id="btn_sign_up" type="submit" value="Sign up" class="btn_sing_in">
+              <br>
 
               <div class="container_2">
                 <hr>
                 <div class="or">or</div>
+              </div>
+              <br>
+              <div class="btn_sing_Google">
+                <i class="fab fa-google"></i>
+                <a href="#"></a>
+                <input type="submit" value="Sign in with Google" onClick="window.open('#')" class="btn_sing_G">
+                </a>
+              </div>
             </div>
-            <br>
-            <div class="btn_sing_Google">
-              <i class="fab fa-google"></i>
-            <input type="submit" value="Sign in with Google" onClick="window.open('#')" class="btn_sing_G">
+            <!--popup_text_2-->
           </div>
-      </div><!--popup_text-->
-  </div><!--popup_content-->
-</div><!--popup_body-->
-</div><!--popup-->
-    </body>
+          <!--popup_content-->
+        </div>
+        <!--popup_body-->
+      </div>
+      <!--popup_3-->
+      <script src="js/script.js"></script>
+      <script src="js/main.js"></script>
+</body>
+
 </html>
