@@ -11,7 +11,12 @@ spec:
     metadata:
      labels:
        app: authorization
+     annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "authorization-service"
+        vault.hashicorp.com/agent-inject-secret-database-config.txt: "internal/data/database/config"
     spec:
+      serviceAccountName: authorization-service
       containers:
         - image: authorization:0.1
           imagePullPolicy: Never

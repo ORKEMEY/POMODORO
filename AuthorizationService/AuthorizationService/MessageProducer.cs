@@ -32,7 +32,7 @@ namespace AuthorizationService
                 }
                 catch (ProduceException<Null, string> e)
                 {
-                   
+                    Console.WriteLine($"[ERROR] MessageProducer.SendMessageAsync {e.Message}");
                 }
 
             }
