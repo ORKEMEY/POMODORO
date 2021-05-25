@@ -25,7 +25,7 @@ ul li{list-style: none;}
 
 /*------------------------------------------------------------------------------------*/
 body{
-  background:  #FF6347 ;
+  background:   #E5E5E5; ;
 }
 .navigation{
 
@@ -38,15 +38,15 @@ body{
   display: flex;
 }
 .nav li a{
-  color: #0a5f11;
+  color: #2B0300;
   margin: 0 30px 0 0;
-  font-size: 18px;
+  font-size: 20px;
 }
 /* experiments */
 .nav li p{
-  color: #0a5f11;
+  color: #2B0300;
   margin: 0 30px 0 0;
-  font-size: 18px;
+  font-size: 20px;
 }
 /* experiments */
 .logo{
@@ -310,36 +310,47 @@ margin: 10px 0px 16px 0px ;
 /*--------------------------------------*/
 .container{
   margin-right: 20%;
+  margin-top: 20px;
 }
-/* Countdown timer */
+
 .timer {
-  color: #0e4215;
-  text-align: center;
+  color: #FFFFFF;
+  
   font-size: 30px;
   width: 20rem;
   height: 20rem;
-  border: 15px solid rgb(115, 18, 18);
+  background-color: #CC5B53;
   border-radius: 10rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  text-align: center;
+  
+}
+
+.stem{
+ margin-top: -25px;
+  width: 274.6px;
+height: 112.59px;
+
 }
 .row {
+  margin: 35px auto;
   width: 30%;
   display: flex;
   justify-content: space-between;
+
 
 }
 .cont_btn{
   display: flex;
   justify-content: space-between;
-  justify-content: center;
+  margin: auto 43% auto 25%;
+ 
 }
 .btn, .fa-redo{
   padding: 0;
   justify-content: center;
   background: none;
-  color: #0e4215;
+  color: #CC5B53;
   font-size: 40px;
   border: 2px solid transparent;
   outline: 0;
@@ -354,10 +365,17 @@ margin: 10px 0px 16px 0px ;
   transition: 0.3s ease;
 }
 .show_message {
-  display: block;
+  position: absolute;
+  width: 951px;
+  height: 50px;
+  left: 245px;
+  top: -150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 1rem 0;
-  color: #272343;
-  background: #e3f6f5;
+  color: #FFFFFF;
+  background: #34B456;
   border-radius: 0.5rem;
   transition: 0.5s ease;
 }
