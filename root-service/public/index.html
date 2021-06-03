@@ -27,7 +27,7 @@
   <!-------------------------------------------------------->
   <div class="description">
     <h1> Pomodoro tracker - customizable timer that works on desktop browser.</h1>
-    <div class="container">
+    <div class="container" id="container">
       <!-- Main Timer -->
       <div class="menu">
         <ul class="nav">
@@ -124,15 +124,14 @@
               </div>
               <br>
               <div class="">
-                <div id="popup_2_alert" class="alert alert-danger form-block" role="alert" hidden>
-                </div>
+                <div id="popup_2_alert" class="alert alert-danger form-block" role="alert" hidden></div>
               </div>
               <p>Your email</p>
               <input id="int_popup_2_email" type="email" class="input-form">
               <p>Your password</p>
               <input id="int_popup_2_password" type="password" class="input-form">
               <br>
-              <input id="btn_sign_in" type="submit" value="Sign in" onClick="window.open('#')" class="btn_sing_in">
+              <a id="btn_sign_in" type="submit" class="btn_sing_in" href="./html/cabinet.html" > Sign in </a>
               <br>
               <div class="container_2">
                 <hr>

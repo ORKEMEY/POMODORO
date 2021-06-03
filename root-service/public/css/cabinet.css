@@ -1,0 +1,16 @@
+.top_task{
+    display:flex;
+    justify-content: space-between;
+}
+.btn_create_task{
+    display: flex;
+align-items: center;
+justify-content: center ;
+color: white;
+width: 110px;
+height: 26px;
+left: 8px;
+top: 8px;
+background: #CC5B53;
+border-radius: 6px;
+}

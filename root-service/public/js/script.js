@@ -132,6 +132,7 @@ function output_greeting(login){
     li.appendChild(p);
 
     document.getElementById("a_log_in").parentNode.parentNode.appendChild(li);
+    document.getElementById("name").innerText = login.toString();
 } 
 
 function hide_greeting(){

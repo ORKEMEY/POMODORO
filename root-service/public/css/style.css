@@ -83,12 +83,13 @@ body{
   left: 0;
   opacity: 0;
   visibility: hidden;
+  }
 
-}
 .popup:target{
   opacity: 1;
   visibility: visible;
 }
+
 .popup_body{
   min-height: 100%;
   display: flex;
@@ -210,7 +211,7 @@ font-size: 16px;
 line-height: 18px;
 }
 .reg_yet{
-display: flex;
+display:flex;
   justify-content: space-between;
   text-align: center;
 }
@@ -223,6 +224,9 @@ background: #F0F0F0;
 border-radius: 6px;
 }
 .btn_sing_in{
+display: flex;
+align-items: center;
+justify-content: center ;
 color: white;
 width: 380px;
 height: 48px;
@@ -230,8 +234,9 @@ left: 35px;
 top: 283px;
 background: #CC5B53;
 border-radius: 6px;
-margin: 20px 0;
+margin: 40px 0;
 }
+
 .or {
 text-align: center;
   /* чтобы линии не выходили за ширину блока заголовка */
@@ -309,13 +314,12 @@ margin: 10px 0px 16px 0px ;
 
 /*--------------------------------------*/
 .container{
-  margin-right: 20%;
+  margin-right: 5%;
   margin-top: 20px;
 }
 
 .timer {
   color: #FFFFFF;
-  
   font-size: 30px;
   width: 20rem;
   height: 20rem;
