@@ -16,7 +16,8 @@ async function register_async() {
         sessionStorage.setItem(loginKey, data.login);
         output_greeting(data.login);
         replace_log_in_btn();
-        document.location.href = "#";
+        document.getElementById('popup_3').hidden = true;
+        document.location.href = "./html/cabinet.html";
     }
     else {
         var alert = document.getElementById("popup_3_alert");
@@ -84,7 +85,8 @@ async function log_in_async() {
         
         output_greeting(data.login);
         replace_log_in_btn();
-        document.location.href = "#";
+        document.getElementById('popup_2').hidden = true;
+        document.location.href = "./html/cabinet.html";
     }
     else {
         var alert = document.getElementById("popup_2_alert");
@@ -132,7 +134,7 @@ function output_greeting(login){
     li.appendChild(p);
 
     document.getElementById("a_log_in").parentNode.parentNode.appendChild(li);
-    document.getElementById("name").innerText = login.toString();
+    //document.getElementById("name").innerText = login.toString();
 } 
 
 function hide_greeting(){
