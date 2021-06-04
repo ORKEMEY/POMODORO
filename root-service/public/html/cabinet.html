@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <title>POMODORO</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/cabinet.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="https://kit.fontawesome.com/a3e84d316e.js" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+      </head>
+      <body onload="template()">
+  <div class="navigation">
+    <div class="logo"> <a href="../index.html">POMODORO</a> </div>
+    <div class="menu">
+      <ul class="nav">
+        <li><a class="link" href="../index.html#popup">Setting</a></li>
+        <li><a id="a_log_out" class="link" href="../index.html">Log out</a></li>
+      </ul>
+    </div>
+  </div>
+<!-------------------------------------------------------->
+ 
+  <div class="description">
+    <div>
+        <div id="name"></div>
+            <div>
+                <div class="top_task">
+                <p>Your tasks for today</p>
+                <a id="btn_create" type="button" class="btn_create_task" href="#popup_create" > Create task </a>
+                </div>
+            <div class="task">
+                <ul class="todos">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="container">
+<!-- Main Timer -->
+      <div class="menu">
+        <ul class="nav">
+           <li><p id="btn_pomodoro" class="link" >Pomodoro</p></li>
+           <li><p id="btn_short_break" class="link" >Short Break</p></li>
+           <li><p id="btn_long_break" class="link" >Long Break</p></li>
+        </ul>
+       </div>
+      <div class="container timer">
+        <p><img src="../img/stem.png" alt="stem" class="stem"></p>
+        <div class="row">
+          <div class="col-5">
+            <h4 id="minutes"></h4>
+          </div>
+          <div class="col-2">
+            <h4>:</h4>
+          </div>
+          <div class="col-5">
+            <h4 id="seconds"></h4>
+          </div>
+        </div>
+      </div>
+<!-- Finished Message -->
+      <div class="my-5">
+        <h3 id="done" class="text-center"></h3>
+      </div>
+
+      <div class="cont_btn">
+        <button id="btn_play_pause" class="btn">
+          <i id="i_btn_play_pause" class="far fa-caret-square-right"></i>
+        </button>
+        <i id="btn_reset" class="fas fa-redo"></i>
+      </div>
+<!-------------------------------------------->
+      <script src="../js/script.js"></script>
+      <script src="../js/main.js"></script>
+<!------POPUP-------------------------------------->
+<div id="popup_create" class="popup">
+    <div class="popup_body">
+      <div class="popup_content">
+        <a href="#" class="popup_close">X</a>
+        <div class="popup_title">Create task</div>
+        <div class="popup_text_2">
+          <br>
+          <div class="">
+            <div id="popup_2_alert" class="alert alert-danger form-block" role="alert" hidden></div>
+          </div>
+          <p>Task title</p>
+          <input id="create_text" type="text" class="input-form">
+          <p>Date</p>
+          <input id="date_task" type="date" class="input-form" min="2000-01-02">
+          <p>Frequency</p>
+          <p><select class="input-form" id="select_fr">
+            <option disabled>Doesn’t repeat</option>
+            <option selected value="Doesn’t repeat">Doesn’t repeat</option>
+            <option value="Daily">Daily</option>
+            <option selected value="Weekly on Saturday">Weekly on Saturday</option>
+            <option value="Monthly on the first Saturday">Monthly on the first Saturday</option>
+            <option value="Every weekday (Monday to Friday)">Every weekday (Monday to Friday)</option>
+            <option value="Every weekend (Saturday and Sunday)">Every weekend (Saturday and Sunday)</option>   
+        </select></p>
+          <br>
+          <a id="btn_create_new" href="#" class="btn_sing_in save" >Create new task </a>
+          <br>
+          </div>
+        </div>
+        <!--popup_text_2-->
+      </div>
+      <!--popup_content-->
+    </div>
+    <!--popup_body-->
+  </div>
+  <!--popup_2-->
+  <script src="../js/script.js"></script>
+  <script src="../js/main.js"></script>
+ 
+</body>
+<script src="../js/task.js"></script>
+</html>

@@ -30,11 +30,11 @@ namespace AuthorizationService
 			services.AddDbContext<AuthorizationContext>();
 			services.AddControllers();
 			services.AddTransient<IUserService, UserService>();
-#if DEBUG
+		#if DEBUG
 			services.AddTransient<IUnitOfWork, UnitOfWork>(x => new UnitOfWork(ServiceModule.GetDbContextOptions("DevConnection")));
-#else
+		#else
 			services.AddTransient<IUnitOfWork, UnitOfWork>(x => new UnitOfWork(ServiceModule.GetDbContextOptions())); 
-#endif
+		#endif
 			//services.AddTransient<IUnitOfWork, UnitOfWork>(x => new UnitOfWork(ServiceModule.GetDbContextOptions()));
 		}
 

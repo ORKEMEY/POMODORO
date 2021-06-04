@@ -22,7 +22,7 @@ namespace EmailService
             smtp.Credentials = new NetworkCredential("pomodoro.kpi.team@gmail.com", "PomidorEtoJagoda");
             
             smtp.Send(message);
-            Console.WriteLine("Message has been sent");
+            Console.WriteLine($"Message has been sent to {email}");
         }
 
     }

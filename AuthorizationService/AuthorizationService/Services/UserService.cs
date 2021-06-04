@@ -22,7 +22,7 @@ namespace AuthorizationService.Services
 		}
 		public UserDAL GetItem(int? id)
 		{
-			if (id == null) throw new ValidationException("Id of user isn't set", "id");
+			if (id == null) throw new ValidationException("Id of user isn't set");
 			var user = uof.Users.GetItem(id.Value);
 
 			if (user == null) throw new ValidationException("No user was found");
@@ -32,17 +32,20 @@ namespace AuthorizationService.Services
 		public void AddItem(UserDAL item)
 		{
 			if (String.IsNullOrEmpty(item.Login))
-				throw new ValidationException("Wrong or empty properties", "Login");
+				throw new ValidationException("Wrong or empty", "login");
 			if (String.IsNullOrEmpty(item.Password))
-				throw new ValidationException("Wrong or empty properties", "Password");
+				throw new ValidationException("Wrong or empty", "password");
 
 			bool isEMail = Regex.IsMatch(item.EMail, patternEMail, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 			if (String.IsNullOrEmpty(item.EMail) | !isEMail)
-				throw new ValidationException("Wrong or empty properties", "EMail");
+				throw new ValidationException("Wrong or empty", "E-Mail");
 			
 			var user = uof.Users.GetItems(u => u.Login == item.Login).FirstOrDefault();
 			if (user != null)
-				throw new ValidationException("This Login is already taken", "Login");
+				throw new ValidationException("This login is already taken");
+			user = uof.Users.GetItems(u => u.EMail == item.EMail).FirstOrDefault();
+			if (user != null)
+				throw new ValidationException("This E-Mail is already taken");
 
 			uof.Users.Create(item);
 			uof.Save();
@@ -57,9 +60,20 @@ namespace AuthorizationService.Services
 			uof.Save();
 		}
 
-		public UserDAL Authentificate(string login, string password)
+		public UserDAL Authentificate(string email, string password)
 		{
-			UserDAL item = uof.Users.GetItems(u => u.Login == login & u.Password == password).FirstOrDefault();
+			if (String.IsNullOrEmpty(password))
+				throw new ValidationException("Wrong or empty", "password");
+
+			bool isEMail = Regex.IsMatch(email, patternEMail, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+			if (String.IsNullOrEmpty(email) | !isEMail)
+				throw new ValidationException("Wrong or empty", "E-Mail");
+
+			UserDAL item = uof.Users.GetItems(u => u.EMail == email).FirstOrDefault();
+			if(item == null)
+				throw new NotFoundException("No account was found");
+			if(item != null & item.Password != password) 
+				throw new ValidationException("Wrong", "password");
 			return item;
 		}
 
