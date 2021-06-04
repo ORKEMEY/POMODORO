@@ -20,3 +20,10 @@ spec:
                 name: authorization-service
                 port:
                   number: 80
+          - path: /metrics
+            pathType: Prefix
+            backend:
+              service:
+                name: authorization-service
+                port:
+                  number: 80

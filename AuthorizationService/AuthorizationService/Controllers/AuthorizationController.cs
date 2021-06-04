@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AuthorizationService.DAL.Models;
 using AuthorizationService.Interfaces;
 using AuthorizationService.Services;
+using Prometheus;
 
 namespace AuthorizationService.Controllers
 {
@@ -14,19 +15,22 @@ namespace AuthorizationService.Controllers
 	[Route("api/authorization")]
 	public class AuthorizationController : ControllerBase
 	{
-
+		private IUserService service { get; set; }
 		public static List<Client> Clients;
+
+		public Counter PostCounter { get; set; }
+		
 
 		static AuthorizationController()
 		{
 			Clients = new List<Client>();
 		}
 
-		private IUserService service { get; set; }
-
 		public AuthorizationController(IUserService service)
 		{
 			this.service = service;
+			this.PostCounter = Metrics.CreateCounter("post_counter", "Registrations counter");
+			Console.WriteLine($"Counter value: {PostCounter.Value}");
 		}
 
 		[HttpGet]
@@ -75,7 +79,7 @@ namespace AuthorizationService.Controllers
 
 				return new BadRequestObjectResult(new { errorText = error });
 			}
-
+			PostCounter.Inc();
 			return new OkResult();
 		}
 

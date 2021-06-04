@@ -10,3 +10,15 @@ kubectl apply -f k8s/storage
 kubectl apply -f k8s/mssql
 kubectl apply -f k8s/kafka
 kubectl apply -f k8s/ingress.yaml
+
+
+minikube addons enable metrics-server
+kubectl create namespace monitoring
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install --namespace monitoring prometheus prometheus-community/kube-prometheus-stack --set server.service.type=LoadBalancer -f k8s/prometheus.values.yaml
+kubectl apply -f .\k8s\grafana-ingress.yaml --namespace=monitoring
+#kubectl get ingress --namespace=monitoring
+#$pass = kubectl get secret --namespace monitoring prometheus-grafana -o jsonpath="{.data.admin-password}"
+#[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($pass))
+
+#helm upgrade prometheus prometheus-community/kube-prometheus-stack --set server.service.type=LoadBalancer --set rbac.create=false -f prometheus.values.yaml
