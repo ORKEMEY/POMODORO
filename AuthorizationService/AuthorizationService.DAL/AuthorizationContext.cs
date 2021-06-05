@@ -8,6 +8,7 @@ namespace AuthorizationService.DAL
 	{
 
 		public DbSet<UserDAL> Users { get; set; }
+		public DbSet<TaskDAL> Tasks { get; set; }
 
 		public AuthorizationContext(DbContextOptions<AuthorizationContext> options) : base(options)
 		{

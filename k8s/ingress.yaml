@@ -21,6 +21,13 @@ spec:
                 name: authorization-service
                 port:
                   number: 80
+          - path: /api/task
+            pathType: Prefix
+            backend:
+              service:
+                name: tasks-service
+                port:
+                  number: 80
           - path: /metrics
             pathType: Prefix
             backend:

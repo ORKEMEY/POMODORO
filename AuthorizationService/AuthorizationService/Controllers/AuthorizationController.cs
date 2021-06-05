@@ -94,6 +94,7 @@ namespace AuthorizationService.Controllers
 		{
 			try
 			{
+				Console.WriteLine($"user:{login} {email} {password}");
 				service.AddItem(new UserDAL()
 				{
 					Login = login,

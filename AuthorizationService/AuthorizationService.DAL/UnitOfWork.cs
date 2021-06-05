@@ -12,6 +12,7 @@ namespace AuthorizationService.DAL
 		private AuthorizationContext db { get; set; }
 
 		private UserRepository _userRepository { get; set; }
+		private TaskRepository _taskRepository { get; set; }
 
 		public UnitOfWork(string connectionString)
 		{
@@ -35,6 +36,16 @@ namespace AuthorizationService.DAL
 				if (_userRepository == null)
 					_userRepository = new UserRepository(db);
 				return _userRepository;
+			}
+		}
+
+		public IRepository<TaskDAL> Tasks
+		{
+			get
+			{
+				if (_taskRepository == null)
+					_taskRepository = new TaskRepository(db);
+				return _taskRepository;
 			}
 		}
 

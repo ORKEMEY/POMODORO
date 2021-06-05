@@ -164,3 +164,6 @@ function replace_log_out_btn(){
     a.href = "#popup_2";
     document.getElementById("a_log_out").replaceWith(a);
 }
+
+
+ document.location.href = "./html/cabinet.html";

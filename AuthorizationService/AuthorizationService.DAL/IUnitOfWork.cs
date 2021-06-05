@@ -8,6 +8,7 @@ namespace AuthorizationService.DAL
 	public interface IUnitOfWork : IDisposable
 	{
 		IRepository<UserDAL> Users { get; }
+		IRepository<TaskDAL> Tasks { get; }
 		void Save();
 	}
 }
