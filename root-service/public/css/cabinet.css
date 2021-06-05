@@ -14,3 +14,13 @@ top: 8px;
 background: #CC5B53;
 border-radius: 6px;
 }
+.todos li{
+    height: 40px;
+border-radius: 6px;
+border: 20px;
+border: 2px solid #34B456;
+align-items: center ;
+}
+.description{
+    width: 80%;
+}
