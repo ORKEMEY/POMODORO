@@ -1,5 +1,4 @@
-var click_sound = new Audio("./audio/click.mp3");
-var bell = new Audio("./audio/bell.mp3");
+
 
 var setting_minutes = 25;
 var setting_short_break = 5;
