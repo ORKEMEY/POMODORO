@@ -149,6 +149,7 @@ function replace_log_in_btn(){
     p.onclick = function () {
         sessionStorage.removeItem(emailKey);
         sessionStorage.removeItem(loginKey);
+        localStorage.clear();
         replace_log_out_btn();
         hide_greeting();
     };
@@ -156,7 +157,6 @@ function replace_log_in_btn(){
 }
 
 function replace_log_out_btn(){
-
     let a = document.createElement('a');
     a.id = "a_log_in";
     a.className = "link";
@@ -164,6 +164,3 @@ function replace_log_out_btn(){
     a.href = "#popup_2";
     document.getElementById("a_log_out").replaceWith(a);
 }
-
-
- document.location.href = "./html/cabinet.html";

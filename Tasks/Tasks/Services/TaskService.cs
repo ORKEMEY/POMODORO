@@ -61,10 +61,26 @@ namespace Tasks.Services
 
 		public void DeleteItem(TaskDAL item)
 		{
-			if (item.Id <= 0)
-				throw new ValidationException("Wrong or empty property Id");
 
-			uof.Tasks.Delete(item.Id);
+			if(String.IsNullOrEmpty(item.Content))
+				throw new ValidationException("Wrong or empty property content");
+
+			if (item.User == null)
+				throw new ValidationException("Wrong or empty property user");
+
+			if (String.IsNullOrEmpty(item.User.EMail))
+				throw new ValidationException("Wrong or empty property email");
+
+			var user = uof.Users.GetItems(u => u.EMail == item.User.EMail).FirstOrDefault();
+			if (user == null)
+				throw new ValidationException("Specified user doesn't exist");
+
+			var task = uof.Tasks.GetItems(u => u.User == user && u.Content == item.Content).FirstOrDefault();
+
+			if (task == null)
+				throw new ValidationException("No task was found");
+
+			uof.Tasks.Delete(task.Id);
 			uof.Save();
 		}
 

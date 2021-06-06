@@ -1,8 +1,14 @@
-function onOpen() {
-    const input = document.querySelector("input[type='text']");
-    const ul = document.querySelector("ul.todos");
-    const saveButton = document.getElementById("btn_create_new");
-    const clearButton = document.querySelector("button.clear");
+var emailKey = "email";
+var loginKey = "login";
+
+const input = document.querySelector("input[type='text']");
+const ul = document.querySelector("ul.todos");
+const saveButton = document.getElementById("btn_create_new");
+const clearButton = document.querySelector("button.clear");
+
+function show_tasks(){
+
+    
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         const stored = localStorage.getItem(key);
@@ -23,16 +29,20 @@ function onOpen() {
         deleteBtn.addEventListener("click", () => {
             const parent = deleteBtn.parentElement;
             let deletekey = icon.id;
+            delete_task_async(localStorage.getItem(deletekey));
             localStorage.removeItem(deletekey);
             parent.remove()
         });
-
-
 
         ul.appendChild(li).append(textSpan, textSpan2, textSpan3, deleteBtn);
         input.value = "";
 
     };
+}
+
+
+function onOpen() {
+    get_task_async();
 
 
     function createTodo() {
@@ -67,8 +77,8 @@ function onOpen() {
                 let deletekey1 = icon.id;
                 localStorage.removeItem(deletekey1);
                 parent.remove()
+                delete_task_async(json);
             });
-
 
 
             ul.appendChild(li).append(textSpan, textSpan2, textSpan3, deleteBtn);
@@ -82,7 +92,6 @@ function onOpen() {
         const keyEnter = 13;
         if (keyPressed.which == keyEnter) {
             createTodo();
-
         }
     });
 
@@ -97,11 +106,75 @@ function onOpen() {
 
     saveButton.addEventListener("click", () => {
         createTodo();
-
+        save_task_async(localStorage.getItem(`"${localStorage.length - 1}"`));
     });
-
-
 
 }
 
 document.addEventListener("DOMContentLoaded", onOpen);
+
+async function delete_task_async(content) {
+
+    var email = sessionStorage.getItem(emailKey);
+
+    const response = await fetch("/api/task?email=" + email +
+        "&content=" + content, {
+        method: "DELETE",
+        headers: { "Accept": "application/json" },
+    });
+    let data = await response.json();
+
+    if (response.ok === true) {
+        
+        alert('task has been deleted');
+    }
+    else {
+        console.log("Error: ", response.status, data.errorText);
+    }
+}
+
+async function save_task_async(content) {
+
+    var email = sessionStorage.getItem(emailKey);
+
+    const response = await fetch("/api/task?email=" + email +
+        "&content=" + content, {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+    });
+    let data = await response.json();
+
+    if (response.ok === true) {
+
+        alert('task has been saved');
+    }
+    else {
+        console.log("Error: ", response.status, data.errorText);
+    }
+}
+
+async function get_task_async() {
+
+    var email = sessionStorage.getItem(emailKey);
+
+    const response = await fetch("/api/task?email=" + email, {
+        method: "GET",
+        headers: { "Accept": "application/json" },
+    });
+    let data = await response.json();
+
+    if (response.ok === true) {
+
+        data.forEach(element => {
+            localStorage.setItem(`"${localStorage.length}"`, element.content);
+        });
+        show_tasks();
+    }
+    else {
+        console.log("Error: ", response.status, data.errorText);
+    }
+}
+
+document.getElementById("a_log_out").onclick = function(){
+    localStorage.clear();
+}

@@ -84,13 +84,17 @@ namespace Tasks
 			return new OkResult();
 		}
 
-		[HttpDelete("{id}")]
-		public IActionResult Delete([FromQuery] int id)
+		[HttpDelete]
+		public IActionResult Delete([FromQuery] string email, string content)
 		{
 			try
 			{
-				var userDTO = service.GetItem(id);
-				service.DeleteItem(userDTO);
+				//var userDTO = service.GetItem(id);
+				service.DeleteItem(new TaskDAL()
+				{
+					User = new UserDAL { EMail = email },
+					Content = content
+				});
 			}
 			catch (ValidationException e)
 			{
