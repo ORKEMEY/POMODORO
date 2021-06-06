@@ -9,6 +9,7 @@ namespace AuthorizationService.DAL
 	{
 		IRepository<UserDAL> Users { get; }
 		IRepository<TaskDAL> Tasks { get; }
+		IRepository<MessageDAL> Messages { get; }
 		void Save();
 	}
 }

@@ -25,5 +25,24 @@ namespace EmailService
             Console.WriteLine($"Message has been sent to {email}");
         }
 
+        public static void SendReplyNotification(string email)
+        {
+            MailAddress from = new MailAddress("pomodoro.kpi.team@gmail.com", "POMODODRO team");
+            MailAddress to = new MailAddress(email);
+            MailMessage message = new MailMessage(from, to);
+
+            message.Subject = "Message";
+            message.Body = "Your message has been replied on POMODORO";
+
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            smtp.EnableSsl = true;
+            smtp.UseDefaultCredentials = false;
+
+            smtp.Credentials = new NetworkCredential("pomodoro.kpi.team@gmail.com", "PomidorEtoJagoda");
+
+            smtp.Send(message);
+            Console.WriteLine($"Message has been sent to {email}");
+        }
+
     }
 }

@@ -13,6 +13,7 @@ namespace AuthorizationService.DAL
 
 		private UserRepository _userRepository { get; set; }
 		private TaskRepository _taskRepository { get; set; }
+		private MessageRepository _messageRepository { get; set; }
 
 		public UnitOfWork(string connectionString)
 		{
@@ -46,6 +47,16 @@ namespace AuthorizationService.DAL
 				if (_taskRepository == null)
 					_taskRepository = new TaskRepository(db);
 				return _taskRepository;
+			}
+		}
+
+		public IRepository<MessageDAL> Messages
+		{
+			get
+			{
+				if (_messageRepository == null)
+					_messageRepository = new MessageRepository(db);
+				return _messageRepository;
 			}
 		}
 

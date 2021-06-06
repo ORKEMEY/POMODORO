@@ -10,6 +10,7 @@ namespace EmailService
 	{
 		static void Main(string[] args)
 		{
+			ReplyMessageConsumer.ProcessMessageAsync();
 			MessageConsumer.ProcessMessageAsync();
 		}
 	}
