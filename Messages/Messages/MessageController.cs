@@ -112,6 +112,24 @@ namespace Messages
 			return new OkResult();
 		}
 
+		[HttpDelete("{id}")]
+		public IActionResult Delete(int id)
+		{
+			try
+			{
+				//var userDTO = service.GetItem(id);
+				service.DeleteItem(id);
+			}
+			catch (ValidationException e)
+			{
+				string error = e.Message;
+				if (e.Property != null) error += " " + e.Property;
+				return new NotFoundObjectResult(new { errorText = error });
+			}
+
+			return Ok();
+		}
+
 		[HttpDelete]
 		public IActionResult Delete([FromQuery] string email, string content)
 		{

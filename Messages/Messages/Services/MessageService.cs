@@ -87,7 +87,7 @@ namespace Messages.Services
 				user = uof.Users.GetItems(u => u.EMail == item.ReplyOn.User.EMail).FirstOrDefault();
 				if (user == null)
 					throw new ValidationException("Specified replying user doesn't exist");
-				var message = uof.Messages.GetItems(u => u.User == user).FirstOrDefault();
+				var message = uof.Messages.GetItems(u => u.User == user && u.Content == item.ReplyOn.Content).FirstOrDefault();
 				if (message == null)
 					throw new ValidationException("Reply message doesn't exist");
 
@@ -120,7 +120,18 @@ namespace Messages.Services
 			if (message == null)
 				throw new ValidationException("No message was found");
 
-			uof.Tasks.Delete(message.Id);
+			uof.Messages.Delete(message.Id);
+			uof.Save();
+		}
+
+		public void DeleteItem(int id)
+		{
+			var message = uof.Messages.GetItems(u => u.Id == id).FirstOrDefault();
+
+			if (message == null)
+				throw new ValidationException("No message was found");
+
+			uof.Messages.Delete(message.Id);
 			uof.Save();
 		}
 

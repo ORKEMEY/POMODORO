@@ -12,5 +12,6 @@ namespace Messages.Interfaces
 		public IEnumerable<MessageDAL> GetItems();
 		void AddItem(MessageDAL item);
 		void DeleteItem(MessageDAL item);
+		void DeleteItem(int id);
 	}
 }
